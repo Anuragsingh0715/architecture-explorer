@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Interactive Computer Architecture Explorer</title>
+  <style>
+    :root{--accent:#0f6fff;--muted:#666;--card:#f8f9fb}
+    *{box-sizing:border-box}
+    body{font-family:Inter,Roboto,Arial,sans-serif;margin:0;background:#fff;color:#111;line-height:1.45}
+    header{background:linear-gradient(90deg,#0f6fff22,#0f6fff11);padding:18px 24px;border-bottom:1px solid #eee}
+    .wrap{max-width:980px;margin:18px auto;padding:0 18px}
+    h1{margin:0;font-size:22px}
+    p.lead{margin:6px 0 0;color:var(--muted)}
+    nav{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+    nav a{padding:8px 12px;background:#fff;border:1px solid #e6e9ef;border-radius:8px;text-decoration:none;color:var(--accent);font-weight:600}
+    nav a.active{background:var(--accent);color:#fff}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:18px}
+    .card{background:var(--card);padding:14px;border-radius:10px;border:1px solid #eee}
+    .card h3{margin:6px 0}
+    .small{font-size:13px;color:var(--muted)}
+    footer{margin:40px 0 80px;color:var(--muted);font-size:13px;text-align:center}
+    .page{display:none}
+    .page.active{display:block}
+    pre.code{background:#0b0b0b;color:#fff;padding:12px;border-radius:6px;overflow:auto}
+    .diagram{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+    .diagram svg{max-width:100%;height:auto;border-radius:8px;border:1px solid #eee}
+    .btn{background:var(--accent);color:white;padding:8px 12px;border-radius:8px;border:0;cursor:pointer}
+    input[type="text"], input[type="number"], textarea, select{padding:8px;border-radius:6px;border:1px solid #ddd;width:100%}
+    table{width:100%;border-collapse:collapse;margin-top:8px}
+    table,td,th{border:1px solid #eee}
+    td,th{padding:8px;text-align:left}
+    .collapsible{background:#fff;border:1px solid #eee;padding:10px;border-radius:8px}
+    .muted{color:var(--muted)}
+    .controls{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+    .bin-output{font-family:monospace;background:#f7f7f7;padding:8px;border-radius:6px;border:1px solid #eee}
+    @media (max-width:720px){.diagram{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Interactive Computer Architecture Explorer</h1>
+      <p class="lead">BCA 3rd Semester project — Anurag Singh · ERP ID: 0241BCA002</p>
+      <nav id="nav">
+        <a href="#" data-page="home" class="active">Home</a>
+        <a href="#" data-page="functional">Functional Units</a>
+        <a href="#" data-page="von">Von Neumann</a>
+        <a href="#" data-page="floating">Floating & Bitwise Lab</a>
+        <a href="#" data-page="reflection">Reflection</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HOME -->
+    <section id="home" class="page active">
+      <div class="card">
+        <h2>Project Overview</h2>
+        <p>This interactive explorer covers core topics from Computer System Architecture: <strong>Functional Units</strong>, <strong>Von Neumann Architecture</strong>, <strong>Floating-point arithmetic</strong>, and <strong>Bitwise operations</strong>. Use the navigation above to jump to sections. Everything is ready to be hosted on GitHub Pages or Replit.</p>
+        <div style="margin-top:12px" class="small">Marks breakdown: Functional Units (3), Von Neumann Visualizer (3), Data Representation Simulator (3), Floating Point & Bitwise Lab (3), AI Usage & Reflection (3).</div>
+      </div>
+
+      <div class="grid" style="margin-top:18px">
+        <div class="card">
+          <h3>Functional Units</h3>
+          <p class="small">Interactive cards with diagrams & examples for Input, Output, ALU, Control Unit and Memory.</p>
+        </div>
+        <div class="card">
+          <h3>Von Neumann Visualizer</h3>
+          <p class="small">Diagram + stepwise flowchart and a unique instruction example <code>LOAD A</code>.</p>
+        </div>
+        <div class="card">
+          <h3>Floating & Bitwise Lab</h3>
+          <p class="small">Interactive converters, demos for IEEE-754, addition/subtraction steps, and bitwise exercises.</p>
+        </div>
+        <div class="card">
+          <h3>Reflection</h3>
+          <p class="small">AI usage log and short reflection to complete deliverables.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FUNCTIONAL UNITS -->
+    <section id="functional" class="page">
+      <div class="card">
+        <h2>Functional Units Explorer</h2>
+        <p class="small">Click a unit to expand details and view diagram + example.</p>
+
+        <div class="grid" style="margin-top:12px">
+          <div class="card">
+            <h3>Input Unit</h3>
+            <div class="muted">Accepts data and instructions from external devices into the computer.</div>
+            <div class="collapsible" style="margin-top:8px">Examples: Keyboard, Mouse, Scanner. Diagram below shows a simple input interface to the bus.</div>
+            <svg viewBox="0 0 400 140" width="100%" style="margin-top:8px">
+              <rect x="6" y="18" width="120" height="40" fill="#fff" stroke="#ddd" rx="6"/>
+              <text x="66" y="44" font-size="12" text-anchor="middle">Input Unit</text>
+              <rect x="180" y="18" width="120" height="40" fill="#fff" stroke="#ddd" rx="6"/>
+              <text x="240" y="44" font-size="12" text-anchor="middle">Bus</text>
+              <line x1="126" y1="38" x2="180" y2="38" stroke="#aaa" stroke-width="2" stroke-dasharray="4 3"/>
+            </svg>
+          </div>
+
+          <div class="card">
+            <h3>Output Unit</h3>
+            <div class="muted">Converts processed data into human readable form.</div>
+            <div class="collapsible" style="margin-top:8px">Examples: Monitor, Printer, Speakers.</div>
+            <svg viewBox="0 0 400 140" width="100%" style="margin-top:8px">
+              <rect x="6" y="18" width="120" height="40" fill="#fff" stroke="#ddd" rx="6"/>
+              <text x="66" y="44" font-size="12" text-anchor="middle">Bus</text>
+              <rect x="180" y="18" width="120" height="40" fill="#fff" stroke="#ddd" rx="6"/>
+              <text x="240" y="44" font-size="12" text-anchor="middle">Output Unit</text>
+              <line x1="126" y1="38" x2="180" y2="38" stroke="#aaa" stroke-width="2" stroke-dasharray="4 3"/>
+            </svg>
+          </div>
+
+          <div class="card">
+            <h3>ALU</h3>
+            <div class="muted">Performs arithmetic & logic operations (add, sub, AND, OR).</div>
+            <div class="collapsible" style="margin-top:8px">Example: CPU core executing arithmetic operations. Includes simple ripple-carry adder concept in diagram.</div>
+            <svg viewBox="0 0 400 140" width="100%" style="margin-top:8px">
+              <rect x="120" y="18" width="160" height="60" fill="#fff" stroke="#ddd" rx="8"/>
+              <text x="200" y="52" font-size="13" text-anchor="middle">ALU</text>
+            </svg>
+          </div>
+
+          <div class="card">
+            <h3>Control Unit</h3>
+            <div class="muted">Directs the flow of instructions and controls other units.</div>
+            <div class="collapsible" style="margin-top:8px">Example: Instruction decoder, program counter & control signals generator.</div>
+            <svg viewBox="0 0 400 140" width="100%" style="margin-top:8px">
+              <rect x="120" y="18" width="160" height="60" fill="#fff" stroke="#ddd" rx="8"/>
+              <text x="200" y="52" font-size="13" text-anchor="middle">Control Unit</text>
+            </svg>
+          </div>
+
+          <div class="card">
+            <h3>Memory Unit</h3>
+            <div class="muted">Stores instructions and data (volatile and non-volatile).</div>
+            <div class="collapsible" style="margin-top:8px">Examples: RAM, Cache, Hard Drive. Diagram shows connection to bus.</div>
+            <svg viewBox="0 0 400 140" width="100%" style="margin-top:8px">
+              <rect x="6" y="18" width="120" height="80" fill="#fff" stroke="#ddd" rx="6"/>
+              <text x="66" y="62" font-size="12" text-anchor="middle">Memory</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VON NEUMANN -->
+    <section id="von" class="page">
+      <div class="card">
+        <h2>Von Neumann Architecture Visualizer</h2>
+        <p class="small">Main diagram shows CPU, Memory and I/O connected via a common bus. Below is a step-by-step flow for the instruction <code>LOAD A</code>.</p>
+
+        <div class="diagram">
+          <!-- Main diagram: CPU <-> Memory <-> I/O with Bus -->
+          <svg viewBox="0 0 900 220" width="100%" height="240" role="img" aria-label="Von Neumann diagram">
+            <!-- Bus -->
+            <rect x="20" y="100" width="860" height="34" rx="6" fill="#f4f8ff" stroke="#e6eefc"/>
+            <text x="450" y="122" font-size="13" fill="#0f6fff" text-anchor="middle">System Bus (Address / Data / Control)</text>
+
+            <!-- CPU -->
+            <rect x="60" y="30" width="200" height="120" rx="8" fill="#fff" stroke="#ddd"/>
+            <text x="160" y="56" font-size="14" font-weight="600">CPU</text>
+            <text x="160" y="76" font-size="12" fill="#666" text-anchor="middle">(Control Unit, ALU, Registers)</text>
+            <line x1="160" y1="150" x2="160" y2="134" stroke="#bbb"/>
+
+            <!-- Memory -->
+            <rect x="340" y="30" width="220" height="120" rx="8" fill="#fff" stroke="#ddd"/>
+            <text x="450" y="56" font-size="14" font-weight="600">Memory</text>
+            <text x="450" y="76" font-size="12" fill="#666" text-anchor="middle">(Instructions & Data)</text>
+            <line x1="450" y1="150" x2="450" y2="134" stroke="#bbb"/>
+
+            <!-- I/O -->
+            <rect x="660" y="30" width="200" height="120" rx="8" fill="#fff" stroke="#ddd"/>
+            <text x="760" y="56" font-size="14" font-weight="600">I/O</text>
+            <text x="760" y="76" font-size="12" fill="#666" text-anchor="middle">(Input & Output Devices)</text>
+            <line x1="760" y1="150" x2="760" y2="134" stroke="#bbb"/>
+
+            <!-- vertical connectors to bus -->
+            <line x1="160" y1="134" x2="160" y2="118" stroke="#888" stroke-width="2"/>
+            <line x1="450" y1="134" x2="450" y2="118" stroke="#888" stroke-width="2"/>
+            <line x1="760" y1="134" x2="760" y2="118" stroke="#888" stroke-width="2"/>
+
+          </svg>
+
+          <!-- Flowchart as inline svg -->
+          <svg viewBox="0 0 420 220" width="420" height="220" style="flex:0 0 420px;border-radius:8px">
+            <!-- Fetch -->
+            <rect x="20" y="14" width="380" height="36" rx="6" fill="#fff" stroke="#e0e6ff"/>
+            <text x="210" y="36" font-size="13" text-anchor="middle">1. Fetch Instruction</text>
+            <!-- Decode -->
+            <rect x="20" y="64" width="380" height="36" rx="6" fill="#fff" stroke="#e0e6ff"/>
+            <text x="210" y="86" font-size="13" text-anchor="middle">2. Decode Instruction</text>
+            <!-- Execute -->
+            <rect x="20" y="114" width="380" height="36" rx="6" fill="#fff" stroke="#e0e6ff"/>
+            <text x="210" y="136" font-size="13" text-anchor="middle">3. Execute Instruction</text>
+            <!-- Store -->
+            <rect x="20" y="164" width="380" height="36" rx="6" fill="#fff" stroke="#e0e6ff"/>
+            <text x="210" y="186" font-size="13" text-anchor="middle">4. Store Result</text>
+
+            <!-- arrows -->
+            <defs>
+              <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 z" fill="#a6b7ff" />
+              </marker>
+            </defs>
+            <line x1="210" y1="50" x2="210" y2="64" stroke="#a6b7ff" stroke-width="2" marker-end="url(#arrow)"/>
+            <line x1="210" y1="100" x2="210" y2="114" stroke="#a6b7ff" stroke-width="2" marker-end="url(#arrow)"/>
+            <line x1="210" y1="150" x2="210" y2="164" stroke="#a6b7ff" stroke-width="2" marker-end="url(#arrow)"/>
+          </svg>
+        </div>
+
+        <div style="margin-top:14px">
+          <div class="card">
+            <h3>Instruction Example: <code>LOAD A</code></h3>
+            <div class="small muted">This example shows how the single instruction flows through von Neumann model.</div>
+            <ol style="margin-top:8px">
+              <li><strong>Fetch:</strong> CPU places address on address bus; memory places instruction on data bus; instruction is loaded into the instruction register.</li>
+              <li><strong>Decode:</strong> Control Unit decodes opcode. CU determines that the operation is "Load into register A" and identifies source address.</li>
+              <li><strong>Execute:</strong> Memory data at source address is put on the data bus; ALU/register logic moves data into CPU register A.</li>
+              <li><strong>Store:</strong> Register A now contains the loaded value; the next instruction is fetched.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLOATING & BITWISE -->
+    <section id="floating" class="page">
+      <div class="card">
+        <h2>Floating-Point Arithmetic & Bitwise Lab</h2>
+        <p class="small">Interactive demos: Convert decimal ↔ IEEE-754 (32-bit), see stepwise addition (illustrative), and try bitwise operations.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+          <div class="card">
+            <h3>IEEE-754 Converter (32-bit)</h3>
+            <label>Enter decimal number:</label>
+            <input id="decInput" type="text" value="-6.25" />
+            <div class="controls">
+              <button class="btn" onclick="convertFloat()">Convert</button>
+            </div>
+            <div style="margin-top:10px">
+              <div><strong>Sign:</strong> <span id="sign"></span></div>
+              <div><strong>Exponent (binary):</strong> <span id="exp"></span></div>
+              <div><strong>Mantissa:</strong> <span id="mant"></span></div>
+              <div style="margin-top:8px"><strong>IEEE-754 (binary):</strong>
+                <div class="bin-output" id="ieee"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Floating-point addition (illustration)</h3>
+            <p class="small">Example: 3.5 + 1.25 — steps shown (alignment, add mantissas, normalize).</p>
+            <pre class="code">3.5  = 0 10000000 11000000000000000000000
+1.25 = 0 01111111 01000000000000000000000
+-------------------------------
+Align exponents: shift mantissa of smaller exponent
+Add mantissas, normalize, round → result: 4.75</pre>
+          </div>
+        </div>
+
+        <div style="margin-top:12px" class="card">
+          <h3>Bitwise Operations Interactive</h3>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <div style="flex:1;min-width:160px">
+              <label>Binary A:</label>
+              <input id="binA" type="text" value="1010" placeholder="e.g. 1010" />
+            </div>
+            <div style="flex:1;min-width:160px">
+              <label>Binary B:</label>
+              <input id="binB" type="text" value="1100" placeholder="e.g. 1100" />
+            </div>
+            <div style="flex:0 0 160px;align-self:end">
+              <button class="btn" onclick="computeBitwise()">Compute</button>
+            </div>
+          </div>
+
+          <div id="bitResults" style="margin-top:12px;display:none">
+            <table>
+              <tr><th>Operation</th><th>Result</th></tr>
+              <tr><td>A &amp; B</td><td id="andRes"></td></tr>
+              <tr><td>A | B</td><td id="orRes"></td></tr>
+              <tr><td>A ^ B</td><td id="xorRes"></td></tr>
+              <tr><td>~A (bitwise NOT)</td><td id="notA"></td></tr>
+              <tr><td>A &lt;&lt; 1 (left shift)</td><td id="shl"></td></tr>
+              <tr><td>A &gt;&gt; 1 (logical right shift)</td><td id="shr"></td></tr>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- REFLECTION -->
+    <section id="reflection" class="page">
+      <div class="card">
+        <h2>AI Usage & Reflection</h2>
+        <p class="small">Brief reflection on AI tools used and personal contributions.</p>
+        <p><strong>Tools used:</strong> ChatGPT for explanations and structure, simple SVG for diagrams (hand-crafted), Canva/draw.io for optional images.</p>
+        <p><strong>How AI helped:</strong> Generated structured explanations and examples. I revised and rewrote content to match syllabus and added interactive demos.</p>
+        <p><strong>Personal work:</strong> Implemented the interactive demos, created diagrams, and assembled the website for submission.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="wrap">
+    <p>&copy; 2025 Interactive Computer Architecture Explorer | Created by Anurag Singh</p>
+  </footer>
+
+  <script>
+    // Navigation
+    document.querySelectorAll('#nav a').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        e.preventDefault();
+        document.querySelectorAll('#nav a').forEach(x=>x.classList.remove('active'));
+        a.classList.add('active');
+        const page = a.dataset.page;
+        document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+        document.getElementById(page).classList.add('active');
+      })
+    });
+
+    // IEEE-754 converter using Float32Array/DataView
+    function floatToIEEE32Bits(num){
+      const f32 = new Float32Array(1);
+      f32[0]=num;
+      const dv = new DataView(f32.buffer);
+      const bits = dv.getUint32(0).toString(2).padStart(32,'0');
+      return bits;
+    }
+    function ieeeSplit(bits){
+      return {
+        sign: bits[0],
+        exponent: bits.slice(1,9),
+        mantissa: bits.slice(9)
+      }
+    }
+    function convertFloat(){
+      const v = document.getElementById('decInput').value.trim();
+      const num = Number(v);
+      if(isNaN(num)){
+        alert('Enter a valid number'); return;
+      }
+      const bits = floatToIEEE32Bits(num);
+      const s = ieeeSplit(bits);
+      document.getElementById('sign').textContent = s.sign;
+      document.getElementById('exp').textContent = s.exponent;
+      document.getElementById('mant').textContent = s.mantissa;
+      document.getElementById('ieee').textContent = bits.match(/.{1,4}/g).join(' ');
+    }
+    // initialize converter
+    convertFloat();
+
+    // Bitwise operations
+    function binaryStringToNumber(str){
+      return parseInt(str,2);
+    }
+    function padBin(str,len){
+      return str.padStart(len,'0');
+    }
+    function computeBitwise(){
+      const A = document.getElementById('binA').value.trim();
+      const B = document.getElementById('binB').value.trim();
+      if(!/^[01]+$/.test(A) || !/^[01]+$/.test(B)){
+        alert('Use only binary digits 0 and 1'); return;
+      }
+      const len = Math.max(A.length,B.length);
+      const aNum = binaryStringToNumber(A);
+      const bNum = binaryStringToNumber(B);
+      const andNum = aNum & bNum;
+      const orNum = aNum | bNum;
+      const xorNum = aNum ^ bNum;
+      const notANum = (~aNum) & ((1<<len)-1); // mask to length
+      const shlNum = (aNum<<1) & ((1<<(len+1))-1);
+      const shrNum = aNum>>1;
+      document.getElementById('andRes').textContent = padBin(andNum.toString(2),len);
+      document.getElementById('orRes').textContent = padBin(orNum.toString(2),len);
+      document.getElementById('xorRes').textContent = padBin(xorNum.toString(2),len);
+      document.getElementById('notA').textContent = padBin(notANum.toString(2),len);
+      document.getElementById('shl').textContent = padBin(shlNum.toString(2),len+1);
+      document.getElementById('shr').textContent = padBin(shrNum.toString(2),Math.max(1,len-1));
+      document.getElementById('bitResults').style.display = 'block';
+    }
+
+  </script>
+</body>
+</html>
